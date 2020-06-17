@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1592329891445.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "24|6|27|0|\n",
+    "hash" : "1283773799",
+    "id" : "3628C696",
+    "lastKnownWriteTime" : 1592331619,
+    "last_content_update" : 1592331823763,
+    "path" : "/Volumes/GoogleDrive/My Drive/1. Learning/rshiny_mastering_book/first_app/app.R",
+    "project_path" : "first_app/app.R",
+    "properties" : {
+        "cursorPosition" : "7,4",
+        "scrollLine" : "2"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
