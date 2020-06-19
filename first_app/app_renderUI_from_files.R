@@ -27,7 +27,7 @@ options(shiny.maxRequestSize = 30*1024^2)
     uiOutput('ui.preview'),
     
     #Output table on preview button
-    tableOutput("head"),
+    DT::dataTableOutput("head"),
     
     #
     textOutput('contents')
@@ -48,7 +48,6 @@ options(shiny.maxRequestSize = 30*1024^2)
              xlsx = read_excel(input$oefile$datapath),
              validate("Invalid file; Please upload a .csv or .xlsx file")
       )
-      
     })
     
     # Get file data when file_2 is uploaded
@@ -89,7 +88,7 @@ options(shiny.maxRequestSize = 30*1024^2)
     
     # Output head of input data file, via data reactive
     observeEvent(input$preview, {
-      output$head <- renderTable({head(data_1())})
+      output$head <- DT::renderDataTable({head(data_1())})
     })
 
     
