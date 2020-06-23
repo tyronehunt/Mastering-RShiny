@@ -1,6 +1,57 @@
+/* Header title font */
 .main-header .logo {
-    font-family: "Georgia", Times, "Times New Roman", serif;
-    font-weight: bold;
-    font-size: 24px;
+            font-family: "Georgia", Times, "Times New Roman", serif;
+            font-weight: bold;
+            font-size: 24px;
   }
-  
+
+/* Header background color (left part)*/  
+.skin-blue .main-header .logo{
+  background-color: #ef7207; 
+}
+
+/* Header background color (left part) on mouse-hover */    
+.skin-blue .main-header .logo:hover {
+  background-color: #0a9dc8;
+}
+
+/* Header background color (right part) */  
+.skin-blue .main-header .navbar {
+  background-color: #0a9dc8;  
+}
+
+/* Main sidebar */  
+.skin-blue .main-sidebar {
+  background-color: #363636;
+}
+
+/* Main sidebar */  
+.skin-blue .main-sidebar {
+  background-color: #363636;
+}
+
+/* Active sidebar menu item */  
+.skin-blue .main-sidebar .sidebar .sidebar-menu .active a{
+  background-color: #f4a15a;
+}
+
+/* Sidebar menuitems (not hovered or selected) */
+/* .skin-blue .main-sidebar .sidebar .sidebar-menu a{
+  background-color: #797979;
+} */
+
+/*  Sidebar menu item - mouse-hover */  
+/* .skin-blue .main-sidebar .sidebar .sidebar-menu a:hover{
+  background-color: #ef7207;
+  color: black;
+} */  
+
+/*  Sidebar toggle button */ 
+.skin-blue .main-header .navbar .sidebar-toggle{
+  background-color: #363636
+}
+
+/*  Sidebar toggle button */ 
+.skin-blue .main-header .navbar .sidebar-toggle:hover{
+  background-color: #f4a15a
+}
