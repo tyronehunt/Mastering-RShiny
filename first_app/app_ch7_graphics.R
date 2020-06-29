@@ -25,6 +25,7 @@ server <- function(input, output, session) {
     
   }, deleteFile = FALSE)
   
+  # Debugging!
   observeEvent(input$id, {
     message(glue("inputid: {input$id}"))
     t2 <- paste0(input$id, ".jpg")
