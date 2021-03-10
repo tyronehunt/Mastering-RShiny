@@ -4,38 +4,50 @@ library(ggplot2)
 library(magrittr)
 library(dplyr)
 library(DT)
+library(shinydashboard)
 
 source('module.R')
+tags$head(tags$script(src="https://use.fontawesome.com/15c2608d79.js"))
 
 ui <- fluidPage(
-    
-        actionButton(inputId = "print", label = "print inputs"),
-        actionButton(inputId = "add",
-                     label = "Add"),
-        tags$div(id = "add_UI_here"),
-        DT::dataTableOutput('preview_data')
+        column(width=4,
+            shinydashboard::box(title="Select Filter Options",
+                actionButton("add", "", 
+                             icon("plus-circle fa-1x"), 
+                             style="float:right; border:none; color:#00bc8c; background-color:rgba(0,0,0,0)"),
+                tags$div(id = "add_UI_here")
+            )
+        ),
+        column(width=8,
+            actionButton(inputId = "print", label = "Show Table"),
+            DT::dataTableOutput('preview_data')
+        )
     
 )
 
 list_modules <- list()
 current_id <- 1
+filter_options <- c("cut", "color", "clarity")
 
 server <- function(input, output, session) {
     
+    # ADD UI ELEMENTS (MODULES)
     observeEvent(input$add, {
         
         new_id <- paste0("module_", current_id)
         
         list_modules[[new_id]] <<- callModule(module = module, id = new_id,
-                       data = diamonds, variables = c("cut", "color", "clarity"))
+                       data = diamonds, variables = filter_options)
         
         insertUI(selector = "#add_UI_here",
-                 ui = module.UI(new_id, variables = c("cut", "color", "clarity")))
+                 # where = "afterEnd",
+                 ui = module.UI(new_id, variables = filter_options))
         
         current_id <<- current_id + 1
         
     })
     
+    # UPDATE DF BASED ON INSERTED UI
     observeEvent(input$print, {
         df <- diamonds
         
@@ -65,7 +77,6 @@ server <- function(input, output, session) {
                               )))})
     })
     
- 
        
 }
 
