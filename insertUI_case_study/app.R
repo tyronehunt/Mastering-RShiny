@@ -12,9 +12,14 @@ tags$head(tags$script(src="https://use.fontawesome.com/15c2608d79.js"))
 ui <- fluidPage(
         column(width=4,
             shinydashboard::box(title="Select Filter Options",
+                # actionButton("removeBtn", "Remove"),
+                actionButton("removeBtn", "", 
+                             icon("minus-circle fa-1x"), 
+                             style="float:left; border:none; color:#bc2c00; background-color:rgba(0,0,0,0)"),
                 actionButton("add", "", 
                              icon("plus-circle fa-1x"), 
                              style="float:right; border:none; color:#00bc8c; background-color:rgba(0,0,0,0)"),
+                fluidRow(),
                 tags$div(id = "add_UI_here")
             )
         ),
@@ -26,7 +31,6 @@ ui <- fluidPage(
 )
 
 list_modules <- list()
-current_id <- 1
 filter_options <- c("cut", "color", "clarity")
 
 server <- function(input, output, session) {
@@ -34,16 +38,19 @@ server <- function(input, output, session) {
     # ADD UI ELEMENTS (MODULES)
     observeEvent(input$add, {
         
-        new_id <- paste0("module_", current_id)
+        btn <- input$add
+        new_id <- paste0("module_", btn)
         
         list_modules[[new_id]] <<- callModule(module = module, id = new_id,
                        data = diamonds, variables = filter_options)
         
         insertUI(selector = "#add_UI_here",
                  # where = "afterEnd",
-                 ui = module.UI(new_id, variables = filter_options))
-        
-        current_id <<- current_id + 1
+                 ui = tags$div(
+                        module.UI(new_id, variables = filter_options),
+                        id = new_id
+                      )
+        )
         
     })
     
@@ -65,18 +72,20 @@ server <- function(input, output, session) {
                           rownames = FALSE,
                           extensions = 'Buttons',
                           options = list(
-                              autoWidth = TRUE, 
+                              paging = FALSE,
                               scrollX = TRUE, 
-                              dom = 'ftpB',
-                              pageLength = 4,
-                              buttons = list(
-                                  list(extend = "collection", text = 'Show More',
-                                       action = DT::JS("function ( e, dt, node, config ) {dt.page.len(10); dt.ajax.reload();}")),
-                                  list(extend = "collection", text = 'Show Less',
-                                       action = DT::JS("function ( e, dt, node, config ) {dt.page.len(4); dt.ajax.reload();}"))
-                              )))})
+                              scrollY = "400px")
+                          )})
     })
     
+    
+    observeEvent(input$removeBtn, {
+        print(paste0('#', names(list_modules)[length(list_modules)]))
+        removeUI(
+            selector = paste0('#', names(list_modules)[length(list_modules)])
+        )
+        list_modules <<- list_modules[-length(list_modules)]
+    })
        
 }
 
