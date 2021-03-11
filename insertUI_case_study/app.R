@@ -12,7 +12,6 @@ tags$head(tags$script(src="https://use.fontawesome.com/15c2608d79.js"))
 ui <- fluidPage(
         column(width=4,
             shinydashboard::box(title="Select Filter Options",
-                # actionButton("removeBtn", "Remove"),
                 actionButton("removeBtn", "", 
                              icon("minus-circle fa-1x"), 
                              style="float:left; border:none; color:#bc2c00; background-color:rgba(0,0,0,0)"),
@@ -41,6 +40,8 @@ server <- function(input, output, session) {
         btn <- input$add
         new_id <- paste0("module_", btn)
         
+        print("on app side, things going in:")
+        print(new_id)
         list_modules[[new_id]] <<- callModule(module = module, id = new_id,
                        data = diamonds, variables = filter_options)
         

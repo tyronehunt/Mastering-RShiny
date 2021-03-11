@@ -20,7 +20,17 @@ module.UI <- function(id, variables){
 
 module <- function(input, output, session, data, variables){
   
+  print("submodule server called")
+  print(input)
+  print("output!")
+  print(output)
+  print("end of output!")
+  
   observeEvent(input$picker_variable,{
+    
+    print(head(data))
+    print(variables)
+    
     updatePickerInput(session,
                       inputId = "picker_value",
                       choices = as.character(unlist(unique(data[, input$picker_variable]))),
